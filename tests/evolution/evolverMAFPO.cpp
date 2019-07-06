@@ -4,7 +4,7 @@
 
 int main() {
 
-	MAFPOEvolver<TestIndividual> evolver(42, {"error"});
+	MAFPOEvolver<TestIndividual> evolver(42, "", {"error"});
 
 	evolver.evolve();
 

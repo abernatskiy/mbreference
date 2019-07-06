@@ -167,7 +167,7 @@ class TestEvolver : public Evolver<MyIndividual> { // simple hill climber (or ra
 public:
 	const std::string evalName;
 	TestEvolver(std::string evaluationName, unsigned randomSeed)
-		: Evolver<MyIndividual>(randomSeed), evalName(evaluationName) {};
+		: Evolver<MyIndividual>(randomSeed, ""), evalName(evaluationName) {};
 	void advanceForOneGeneration() override {
 		double minEval = std::numeric_limits<double>::max();
 		MyIndividual bestIndividual;

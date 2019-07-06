@@ -1,16 +1,12 @@
 #pragma once
 
-#define KSIZE 2
-#define QSIZE (1 << KSIZE)
-#define MIN_CRATER_SIZE 3
-#define MAX_CRATER_SIZE 5
-#define MIN_BOULDER_SIZE 1
-#define MAX_BOULDER_SIZE 5
+#define EVOLVER_MAX_GENERATIONS 2 // -1 for indefinite
+#define EVOLVER_POPULATION_SIZE 3
+#define EVOLVER_RECORDS_PERIOD 1 // -1 for never
 
-#define MIN_FEATURE_SIZE (MIN_BOULDER_SIZE<MIN_CRATER_SIZE ? MIN_BOULDER_SIZE : MIN_CRATER_SIZE) // min across all feature types
-#define MAX_FEATURE_SIZE (MAX_BOULDER_SIZE>MAX_CRATER_SIZE ? MAX_BOULDER_SIZE : MAX_CRATER_SIZE) // max across all feature types
+#define EVOLVER_MAFPO_RECORDS_PERIOD 1 // -1 for never
 
-#define NUM_FACES 6
+#define NUM_THREADS 2
 
 #define DEBUG
 
@@ -19,19 +15,3 @@
 #else
 #define D(x)
 #endif
-
-#define ANN_HIDDEN_SIZE 2
-
-#define ANN_INITIAL_WEIGHTS_MIN -1.
-#define ANN_INITIAL_WEIGHTS_MAX 1.
-
-#define EVOLVER_MAX_GENERATIONS 2 // -1 for indefinite
-#define EVOLVER_POPULATION_SIZE 3
-#define EVOLVER_RECORDS_PERIOD 1 // -1 for never
-
-#define EVOLVER_MAFPO_RECORDS_PERIOD 1 // -1 for never
-
-#define MOD_FRACTION 0.34
-#define ADD_REM_RATIO 1.0
-
-// TODO: enable fast arrays in ann.h

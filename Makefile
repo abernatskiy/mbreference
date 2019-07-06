@@ -1,5 +1,5 @@
 LDFLAGS = -Wall
-CPPFLAGS = -std=c++14 -O3 -fopenmp
+CPPFLAGS = -std=c++14 -O3 -fopenmp -g
 SUFFIX = default
 BINARY = bin/mbreference-${SUFFIX}
 TESTER = bin/tester-${SUFFIX}
