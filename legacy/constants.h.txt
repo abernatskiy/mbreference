@@ -1,0 +1,6 @@
+//#define ANN_INITIAL_WEIGHTS_MIN -1.
+//#define ANN_INITIAL_WEIGHTS_MAX 1.
+//#define ANN_HIDDEN_SIZE 10
+//#define ANN_OUTPUT_SIZE 5
+//#define MOD_FRACTION 0.7
+//#define ADD_REM_RATIO 1.0

@@ -1,0 +1,167 @@
+Generating a bunch of random TestIndividuals. Results:
+0 noevals 2
+1 noevals 30
+2 noevals 3
+3 noevals 42
+4 noevals 52
+
+Mutating the individuals. Results:
+m 5 noevals 3
+m 6 noevals 29
+m 7 noevals 4
+m 8 noevals 41
+m 9 noevals 53
+
+Evaluating the individuals. Results:
+5 aux:1,error:74 3
+6 aux:1,error:48 29
+7 aux:1,error:73 4
+8 aux:1,error:36 41
+9 aux:1,error:24 53
+
+Comparing the individuals' errors
+5 aux:1,error:74 3 vs 5 aux:1,error:74 3: better n equivalent y
+5 aux:1,error:74 3 vs 6 aux:1,error:48 29: better n equivalent n
+5 aux:1,error:74 3 vs 7 aux:1,error:73 4: better n equivalent n
+5 aux:1,error:74 3 vs 8 aux:1,error:36 41: better n equivalent n
+5 aux:1,error:74 3 vs 9 aux:1,error:24 53: better n equivalent n
+6 aux:1,error:48 29 vs 5 aux:1,error:74 3: better y equivalent n
+6 aux:1,error:48 29 vs 6 aux:1,error:48 29: better n equivalent y
+6 aux:1,error:48 29 vs 7 aux:1,error:73 4: better y equivalent n
+6 aux:1,error:48 29 vs 8 aux:1,error:36 41: better n equivalent n
+6 aux:1,error:48 29 vs 9 aux:1,error:24 53: better n equivalent n
+7 aux:1,error:73 4 vs 5 aux:1,error:74 3: better y equivalent n
+7 aux:1,error:73 4 vs 6 aux:1,error:48 29: better n equivalent n
+7 aux:1,error:73 4 vs 7 aux:1,error:73 4: better n equivalent y
+7 aux:1,error:73 4 vs 8 aux:1,error:36 41: better n equivalent n
+7 aux:1,error:73 4 vs 9 aux:1,error:24 53: better n equivalent n
+8 aux:1,error:36 41 vs 5 aux:1,error:74 3: better y equivalent n
+8 aux:1,error:36 41 vs 6 aux:1,error:48 29: better y equivalent n
+8 aux:1,error:36 41 vs 7 aux:1,error:73 4: better y equivalent n
+8 aux:1,error:36 41 vs 8 aux:1,error:36 41: better n equivalent y
+8 aux:1,error:36 41 vs 9 aux:1,error:24 53: better n equivalent n
+9 aux:1,error:24 53 vs 5 aux:1,error:74 3: better y equivalent n
+9 aux:1,error:24 53 vs 6 aux:1,error:48 29: better y equivalent n
+9 aux:1,error:24 53 vs 7 aux:1,error:73 4: better y equivalent n
+9 aux:1,error:24 53 vs 8 aux:1,error:36 41: better y equivalent n
+9 aux:1,error:24 53 vs 9 aux:1,error:24 53: better n equivalent y
+
+Assigning additional objective of age to the individuals and studying dominance
+
+5 age:0,aux:1,error:74 3 is equivalent to 5 age:0,aux:1,error:74 3
+5 age:0,aux:1,error:74 3 is not equivalent to 6 age:1,aux:1,error:48 29
+5 age:0,aux:1,error:74 3 is not equivalent to 7 age:2,aux:1,error:73 4
+5 age:0,aux:1,error:74 3 is not equivalent to 8 age:3,aux:1,error:36 41
+5 age:0,aux:1,error:74 3 is not equivalent to 9 age:4,aux:1,error:24 53
+6 age:1,aux:1,error:48 29 is not equivalent to 5 age:0,aux:1,error:74 3
+6 age:1,aux:1,error:48 29 is equivalent to 6 age:1,aux:1,error:48 29
+6 age:1,aux:1,error:48 29 is not equivalent to 7 age:2,aux:1,error:73 4
+6 age:1,aux:1,error:48 29 is not equivalent to 8 age:3,aux:1,error:36 41
+6 age:1,aux:1,error:48 29 is not equivalent to 9 age:4,aux:1,error:24 53
+7 age:2,aux:1,error:73 4 is not equivalent to 5 age:0,aux:1,error:74 3
+7 age:2,aux:1,error:73 4 is not equivalent to 6 age:1,aux:1,error:48 29
+7 age:2,aux:1,error:73 4 is equivalent to 7 age:2,aux:1,error:73 4
+7 age:2,aux:1,error:73 4 is not equivalent to 8 age:3,aux:1,error:36 41
+7 age:2,aux:1,error:73 4 is not equivalent to 9 age:4,aux:1,error:24 53
+8 age:3,aux:1,error:36 41 is not equivalent to 5 age:0,aux:1,error:74 3
+8 age:3,aux:1,error:36 41 is not equivalent to 6 age:1,aux:1,error:48 29
+8 age:3,aux:1,error:36 41 is not equivalent to 7 age:2,aux:1,error:73 4
+8 age:3,aux:1,error:36 41 is equivalent to 8 age:3,aux:1,error:36 41
+8 age:3,aux:1,error:36 41 is not equivalent to 9 age:4,aux:1,error:24 53
+9 age:4,aux:1,error:24 53 is not equivalent to 5 age:0,aux:1,error:74 3
+9 age:4,aux:1,error:24 53 is not equivalent to 6 age:1,aux:1,error:48 29
+9 age:4,aux:1,error:24 53 is not equivalent to 7 age:2,aux:1,error:73 4
+9 age:4,aux:1,error:24 53 is not equivalent to 8 age:3,aux:1,error:36 41
+9 age:4,aux:1,error:24 53 is equivalent to 9 age:4,aux:1,error:24 53
+
+5 age:0,aux:1,error:74 3 is not any better than 5 age:0,aux:1,error:74 3
+5 age:0,aux:1,error:74 3 is better than 6 age:1,aux:1,error:48 29
+5 age:0,aux:1,error:74 3 is better than 7 age:2,aux:1,error:73 4
+5 age:0,aux:1,error:74 3 is better than 8 age:3,aux:1,error:36 41
+5 age:0,aux:1,error:74 3 is better than 9 age:4,aux:1,error:24 53
+6 age:1,aux:1,error:48 29 is better than 5 age:0,aux:1,error:74 3
+6 age:1,aux:1,error:48 29 is not any better than 6 age:1,aux:1,error:48 29
+6 age:1,aux:1,error:48 29 is better than 7 age:2,aux:1,error:73 4
+6 age:1,aux:1,error:48 29 is better than 8 age:3,aux:1,error:36 41
+6 age:1,aux:1,error:48 29 is better than 9 age:4,aux:1,error:24 53
+7 age:2,aux:1,error:73 4 is better than 5 age:0,aux:1,error:74 3
+7 age:2,aux:1,error:73 4 is not any better than 6 age:1,aux:1,error:48 29
+7 age:2,aux:1,error:73 4 is not any better than 7 age:2,aux:1,error:73 4
+7 age:2,aux:1,error:73 4 is better than 8 age:3,aux:1,error:36 41
+7 age:2,aux:1,error:73 4 is better than 9 age:4,aux:1,error:24 53
+8 age:3,aux:1,error:36 41 is better than 5 age:0,aux:1,error:74 3
+8 age:3,aux:1,error:36 41 is better than 6 age:1,aux:1,error:48 29
+8 age:3,aux:1,error:36 41 is better than 7 age:2,aux:1,error:73 4
+8 age:3,aux:1,error:36 41 is not any better than 8 age:3,aux:1,error:36 41
+8 age:3,aux:1,error:36 41 is better than 9 age:4,aux:1,error:24 53
+9 age:4,aux:1,error:24 53 is better than 5 age:0,aux:1,error:74 3
+9 age:4,aux:1,error:24 53 is better than 6 age:1,aux:1,error:48 29
+9 age:4,aux:1,error:24 53 is better than 7 age:2,aux:1,error:73 4
+9 age:4,aux:1,error:24 53 is better than 8 age:3,aux:1,error:36 41
+9 age:4,aux:1,error:24 53 is not any better than 9 age:4,aux:1,error:24 53
+
+5 age:0,aux:1,error:74 3 is in no way worse than 5 age:0,aux:1,error:74 3
+5 age:0,aux:1,error:74 3 is in some way worse than 6 age:1,aux:1,error:48 29
+5 age:0,aux:1,error:74 3 is in some way worse than 7 age:2,aux:1,error:73 4
+5 age:0,aux:1,error:74 3 is in some way worse than 8 age:3,aux:1,error:36 41
+5 age:0,aux:1,error:74 3 is in some way worse than 9 age:4,aux:1,error:24 53
+6 age:1,aux:1,error:48 29 is in some way worse than 5 age:0,aux:1,error:74 3
+6 age:1,aux:1,error:48 29 is in no way worse than 6 age:1,aux:1,error:48 29
+6 age:1,aux:1,error:48 29 is in no way worse than 7 age:2,aux:1,error:73 4
+6 age:1,aux:1,error:48 29 is in some way worse than 8 age:3,aux:1,error:36 41
+6 age:1,aux:1,error:48 29 is in some way worse than 9 age:4,aux:1,error:24 53
+7 age:2,aux:1,error:73 4 is in some way worse than 5 age:0,aux:1,error:74 3
+7 age:2,aux:1,error:73 4 is in some way worse than 6 age:1,aux:1,error:48 29
+7 age:2,aux:1,error:73 4 is in no way worse than 7 age:2,aux:1,error:73 4
+7 age:2,aux:1,error:73 4 is in some way worse than 8 age:3,aux:1,error:36 41
+7 age:2,aux:1,error:73 4 is in some way worse than 9 age:4,aux:1,error:24 53
+8 age:3,aux:1,error:36 41 is in some way worse than 5 age:0,aux:1,error:74 3
+8 age:3,aux:1,error:36 41 is in some way worse than 6 age:1,aux:1,error:48 29
+8 age:3,aux:1,error:36 41 is in some way worse than 7 age:2,aux:1,error:73 4
+8 age:3,aux:1,error:36 41 is in no way worse than 8 age:3,aux:1,error:36 41
+8 age:3,aux:1,error:36 41 is in some way worse than 9 age:4,aux:1,error:24 53
+9 age:4,aux:1,error:24 53 is in some way worse than 5 age:0,aux:1,error:74 3
+9 age:4,aux:1,error:24 53 is in some way worse than 6 age:1,aux:1,error:48 29
+9 age:4,aux:1,error:24 53 is in some way worse than 7 age:2,aux:1,error:73 4
+9 age:4,aux:1,error:24 53 is in some way worse than 8 age:3,aux:1,error:36 41
+9 age:4,aux:1,error:24 53 is in no way worse than 9 age:4,aux:1,error:24 53
+
+5 age:0,aux:1,error:74 3 is not dominated by 5 age:0,aux:1,error:74 3
+5 age:0,aux:1,error:74 3 is not dominated by 6 age:1,aux:1,error:48 29
+5 age:0,aux:1,error:74 3 is not dominated by 7 age:2,aux:1,error:73 4
+5 age:0,aux:1,error:74 3 is not dominated by 8 age:3,aux:1,error:36 41
+5 age:0,aux:1,error:74 3 is not dominated by 9 age:4,aux:1,error:24 53
+6 age:1,aux:1,error:48 29 is not dominated by 5 age:0,aux:1,error:74 3
+6 age:1,aux:1,error:48 29 is not dominated by 6 age:1,aux:1,error:48 29
+6 age:1,aux:1,error:48 29 is not dominated by 7 age:2,aux:1,error:73 4
+6 age:1,aux:1,error:48 29 is not dominated by 8 age:3,aux:1,error:36 41
+6 age:1,aux:1,error:48 29 is not dominated by 9 age:4,aux:1,error:24 53
+7 age:2,aux:1,error:73 4 is not dominated by 5 age:0,aux:1,error:74 3
+7 age:2,aux:1,error:73 4 is dominated by 6 age:1,aux:1,error:48 29
+7 age:2,aux:1,error:73 4 is not dominated by 7 age:2,aux:1,error:73 4
+7 age:2,aux:1,error:73 4 is not dominated by 8 age:3,aux:1,error:36 41
+7 age:2,aux:1,error:73 4 is not dominated by 9 age:4,aux:1,error:24 53
+8 age:3,aux:1,error:36 41 is not dominated by 5 age:0,aux:1,error:74 3
+8 age:3,aux:1,error:36 41 is not dominated by 6 age:1,aux:1,error:48 29
+8 age:3,aux:1,error:36 41 is not dominated by 7 age:2,aux:1,error:73 4
+8 age:3,aux:1,error:36 41 is not dominated by 8 age:3,aux:1,error:36 41
+8 age:3,aux:1,error:36 41 is not dominated by 9 age:4,aux:1,error:24 53
+9 age:4,aux:1,error:24 53 is not dominated by 5 age:0,aux:1,error:74 3
+9 age:4,aux:1,error:24 53 is not dominated by 6 age:1,aux:1,error:48 29
+9 age:4,aux:1,error:24 53 is not dominated by 7 age:2,aux:1,error:73 4
+9 age:4,aux:1,error:24 53 is not dominated by 8 age:3,aux:1,error:36 41
+9 age:4,aux:1,error:24 53 is not dominated by 9 age:4,aux:1,error:24 53
+
+Making representations:
+5 age:0,aux:1,error:74 3
+6 age:1,aux:1,error:48 29
+7 age:2,aux:1,error:73 4
+8 age:3,aux:1,error:36 41
+9 age:4,aux:1,error:24 53
+
+Restoring the individuals from the representations. The restored ones:
+5 age:0,aux:1,error:74 3
+6 age:1,aux:1,error:48 29
+7 age:2,aux:1,error:73 4
+8 age:3,aux:1,error:36 41
+9 age:4,aux:1,error:24 53
