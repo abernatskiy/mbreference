@@ -24,6 +24,8 @@ note:
 	git rev-parse HEAD >> ${BINARY}.note
 	git diff >> ${BINARY}.note
 
+build/utils/json11/json11.o: utils/json11/json11.hpp utils/json11/json11.cpp
+	g++ -c ${CPPFLAGS} -o $@ utils/json11/json11.cpp
 build/evolution/individual.o: constants.h evolution/individual.h evolution/individual.cpp
 	g++ -c ${CPPFLAGS} -o $@ evolution/individual.cpp
 build/main.o: constants.h utils/strutil.h evolution/individual.h evolution/evolver.h evolution/evolverMAFPO.h main.cpp
@@ -37,7 +39,7 @@ tests/evolution/evolver: constants.h evolution/individual.h evolution/individual
 	g++ ${CPPFLAGS} -o $@ $^
 tests/evolution/evolverMAFPO: constants.h evolution/individual.h evolution/individual.cpp evolution/evolver.h evolution/evolverMAFPO.h tests/evolution/evolverMAFPO.cpp
 	g++ ${CPPFLAGS} -o $@ $^
-tests/mb/gate: mb/gate.h tests/mb/gate.cpp
+tests/mb/gate: mb/gate.h utils/json11/json11.cpp tests/mb/gate.cpp
 	g++ ${CPPFLAGS} -o $@ $^
 
 clean:
