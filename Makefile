@@ -37,6 +37,8 @@ tests/evolution/evolver: constants.h evolution/individual.h evolution/individual
 	g++ ${CPPFLAGS} -o $@ $^
 tests/evolution/evolverMAFPO: constants.h evolution/individual.h evolution/individual.cpp evolution/evolver.h evolution/evolverMAFPO.h tests/evolution/evolverMAFPO.cpp
 	g++ ${CPPFLAGS} -o $@ $^
+tests/mb/gate: mb/gate.h tests/mb/gate.cpp
+	g++ ${CPPFLAGS} -o $@ $^
 
 clean:
 	rm -f ${BINARY} ${BINARY}.note build/*.o build/evolution/*.o
