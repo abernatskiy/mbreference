@@ -12,13 +12,15 @@ void printBrainStates(bool* states, unsigned numStates) {
 
 int main() {
 
+	/********** Testing operation of a manually constructed gate **********/
+
 	const unsigned numStates = 10;
 	bool mbStates[numStates];
 	for(unsigned i=0; i<numStates; i++)
 		mbStates[i] = false;
 
 	Gate g;
-	g.id = 42;
+	g.id = 8;
 	g.inputs.push_back(mbStates);
 	g.inputs.push_back(mbStates+1);
 	g.outputs.push_back(mbStates+1);
@@ -39,6 +41,8 @@ int main() {
 		cout << endl;
 	}
 
+	/********** Testing serialization and deserialization to JSON **********/
+
 	json11::Json gateJSON0 = g.to_json(mbStates);
 	string gdump0 = gateJSON0.dump();
 	cout << "Gate JSON 0: " << gdump0 << endl;
@@ -54,7 +58,28 @@ int main() {
 	string gdump1 = gateJSON1.dump();
 	cout << "Gate JSON 1: " << gdump1 << endl;
 
-	string exampleJSONString = "{\"id\":0,\"inputs\":[54,31,30],\"outputs\":[57,62,11],\"table\":[[1,0,0],[1,0,0],[0,1,1],[1,0,0],[1,1,1],[0,0,1],[1,0,0],[0,0,1]],\"type\":\"Deterministic\"}";
+	/********** Testing randomization and mutations **********/
+
+	mt19937_64 rng(4223);
+	const UIntRange inputNumRange {1, 4};
+	const UIntRange outputNumRange {1, 4};
+	const UIntRange outputStatesRange {0, 5}; // imagining that the last two states are actually brain inputs
+
+	Gate g2;
+	g2.id = 2;
+	g2.randomize(mbStates, numStates, inputNumRange, outputNumRange, outputStatesRange, rng);
+	json11::Json gateJSON2 = g2.to_json(mbStates);
+	string gdump2 = gateJSON2.dump();
+	cout << "Gate JSON 2: " << gdump2 << endl;
+
+	Gate g3;
+	g3.id = 3;
+	g3.randomize(mbStates, numStates, inputNumRange, outputNumRange, outputStatesRange, rng);
+	json11::Json gateJSON3 = g3.to_json(mbStates);
+	string gdump3 = gateJSON3.dump();
+	cout << "Gate JSON 3: " << gdump3 << endl;
+
+//	string exampleJSONString = "{\"id\":0,\"inputs\":[54,31,30],\"outputs\":[57,62,11],\"table\":[[1,0,0],[1,0,0],[0,1,1],[1,0,0],[1,1,1],[0,0,1],[1,0,0],[0,0,1]],\"type\":\"Deterministic\"}";
 
 	return 0;
 };
