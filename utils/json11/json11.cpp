@@ -116,7 +116,7 @@ static void dump(const Json::array &values, string &out) {
     out += "[";
     for (const auto &value : values) {
         if (!first)
-            out += ", ";
+            out += ",";
         value.dump(out);
         first = false;
     }
@@ -128,9 +128,9 @@ static void dump(const Json::object &values, string &out) {
     out += "{";
     for (const auto &kv : values) {
         if (!first)
-            out += ", ";
+            out += ",";
         dump(kv.first, out);
-        out += ": ";
+        out += ":";
         kv.second.dump(out);
         first = false;
     }
