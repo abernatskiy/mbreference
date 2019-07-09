@@ -42,25 +42,25 @@ bool sampleBit(std::mt19937_64& rng) {
 class Gate {
 public:
 	unsigned id;
-	std::vector<bool*> inputs;
-	std::vector<bool*> outputs;
+	std::vector<unsigned> inputShifts;
+	std::vector<unsigned> outputShifts;
 	std::vector<std::vector<bool>> table;
 
-	void update() {
-		std::vector<bool> key(inputs.size());
-		for(unsigned i=0; i<inputs.size(); i++)
-			key[i] = *inputs[i];
+	void update(bool* states, bool* newStates) const {
+		std::vector<bool> key(inputShifts.size());
+		for(unsigned i=0; i<inputShifts.size(); i++)
+			key[i] = states[inputShifts[i]];
 		unsigned ukey = decodeUInt(key);
-		for(unsigned j=0; j<outputs.size(); j++)
-			*outputs[j] = table[ukey][j];
+		for(unsigned j=0; j<outputShifts.size(); j++)
+			newStates[outputShifts[j]] = newStates[outputShifts[j]] || table[ukey][j];
 	};
 
-	json11::Json to_json(bool* states) const {
-		std::vector<int> inshifts, outshifts;
-		for(const auto& in : inputs)
-			inshifts.push_back(in-states);
-		for(const auto& out : outputs)
-			outshifts.push_back(out-states);
+	json11::Json to_json() const {
+		std::vector<int> convertedInputShifts(inputShifts.size());
+		std::vector<int> convertedOutputShifts(outputShifts.size());
+		std::copy(inputShifts.begin(), inputShifts.end(), convertedInputShifts.begin());
+		std::copy(outputShifts.begin(), outputShifts.end(), convertedOutputShifts.begin());
+
 		std::vector<std::vector<int>> convertedTable;
 		for(const auto& row : table) {
 			convertedTable.push_back({});
@@ -68,39 +68,38 @@ public:
 				convertedTable.back().push_back(val ? 1 : 0);
 		}
 		json11::Json out = json11::Json::object { { "id", json11::Json(static_cast<int>(id)) },
-		                                          { "inputs", json11::Json(inshifts) },
-		                                          { "outputs", json11::Json(outshifts) },
+		                                          { "inputs", json11::Json(convertedInputShifts) },
+		                                          { "outputs", json11::Json(convertedOutputShifts) },
 		                                          { "table", json11::Json(convertedTable) },
 		                                          { "type", "Deterministic" } };
 		return out;
 	};
 
-	void from_json(const json11::Json& json, bool* states) {
+	void from_json(const json11::Json& json) {
 		id = json["id"].int_value();
 		for(const auto& inshiftjson : json["inputs"].array_items())
-			inputs.push_back( states + inshiftjson.int_value() );
+			inputShifts.push_back(inshiftjson.int_value());
 		for(const auto& outshiftjson : json["outputs"].array_items())
-			outputs.push_back( states + outshiftjson.int_value() );
+			outputShifts.push_back(outshiftjson.int_value());
 		for(const auto& tablerowjson : json["table"].array_items()) {
 			table.push_back({});
 			for(const auto& tablevaljson : tablerowjson.array_items())
-				table.back().push_back( tablevaljson.int_value() == 1 );
+				table.back().push_back(tablevaljson.int_value()>0);
 		}
 	};
 
-	void randomize(bool* states,
-	               unsigned numStates,
-	               const UIntRange& inputNumRange,
+	void randomize(const UIntRange& inputNumRange,
+	               const UIntRange& inputStatesRange,
 	               const UIntRange& outputNumRange,
-	               const UIntRange& outputStatesRange, // to be able to avoid wasting time writing into inputs
+	               const UIntRange& outputStatesRange,
 	               std::mt19937_64& rng) {
 		const unsigned numInputs = sampleFromUIntRange(inputNumRange, rng);
 		for(unsigned i=0; i<numInputs; i++)
-			inputs.push_back(states + sampleUInt(numStates-1, rng));
+			inputShifts.push_back(sampleFromUIntRange(inputStatesRange, rng));
 
 		const unsigned numOutputs = sampleFromUIntRange(outputNumRange, rng);
 		for(unsigned j=0; j<numOutputs; j++)
-			outputs.push_back(states + sampleFromUIntRange(outputStatesRange, rng));
+			outputShifts.push_back(sampleFromUIntRange(outputStatesRange, rng));
 
 		// NOTE: there's no protection from reading from or writing into the same state node multiple times
 		// It is the same in MABE (mabe/Brain/DEMarkovBrain/DEMarkovBrain.cpp lines 292, 294 @ 9dc4915)
@@ -112,13 +111,12 @@ public:
 		}
 	};
 
-	void rewireAConnectionRandomly(bool* states, unsigned numStates, const UIntRange& outputStatesRange, std::mt19937_64& rng) {
-		const unsigned numConnections = inputs.size() + outputs.size();
-		unsigned rawidx = sampleUInt(numConnections-1, rng);
-		if(rawidx < inputs.size())
-			inputs[rawidx] = states + sampleUInt(numStates-1, rng);
+	void rewireAConnectionRandomly(const UIntRange& inputStatesRange, const UIntRange& outputStatesRange, std::mt19937_64& rng) {
+		unsigned rawidx = sampleUInt(inputShifts.size() + outputShifts.size() - 1, rng);
+		if(rawidx < inputShifts.size())
+			inputShifts[rawidx] = sampleFromUIntRange(inputStatesRange, rng);
 		else
-			outputs[rawidx-inputs.size()] = states + sampleFromUIntRange(outputStatesRange, rng);
+			outputShifts[rawidx-inputShifts.size()] = sampleFromUIntRange(outputStatesRange, rng);
 
 		// NOTE: there's no protection from mutation not modifying the same connection if it samples
 		// the same number as was there before. It's the same in MABE (mabe/Brain/MarkovBrain/Gate/AbstractGate.cpp @ mutateConnections())
@@ -126,7 +124,7 @@ public:
 
 	void modifyTableRandomly(std::mt19937_64& rng) {
 		const unsigned row = sampleUInt(table.size()-1, rng);
-		const unsigned column = sampleUInt(outputs.size()-1, rng);
+		const unsigned column = sampleUInt(outputShifts.size()-1, rng);
 		table[row][column] = table[row][column] ? false : true;
 
 		// NOTE: simple bitflip is the same as in MABE (mabe/Brain/MarkovBrain/Gate/DeterministicGate.cpp @ mutateInternalStructure())

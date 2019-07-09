@@ -16,15 +16,16 @@ int main() {
 
 	const unsigned numStates = 10;
 	bool mbStates[numStates];
-	for(unsigned i=0; i<numStates; i++)
-		mbStates[i] = false;
+	bool newMbStates[numStates];
+	fill(mbStates, mbStates+numStates, false);
+	fill(newMbStates, newMbStates+numStates, false);
 
 	Gate g;
 	g.id = 8;
-	g.inputs.push_back(mbStates);
-	g.inputs.push_back(mbStates+1);
-	g.outputs.push_back(mbStates+1);
-	g.outputs.push_back(mbStates+2);
+	g.inputShifts.push_back(0);
+	g.inputShifts.push_back(1);
+	g.outputShifts.push_back(1);
+	g.outputShifts.push_back(2);
 	g.table.push_back({true, false});
 	g.table.push_back({false, true});
 	g.table.push_back({true, false});
@@ -35,7 +36,9 @@ int main() {
 	printBrainStates(mbStates, numStates);
 	cout << endl;
 	for(unsigned t=0; t<numTimeSteps; t++) {
-		g.update();
+		g.update(mbStates, newMbStates);
+		copy(newMbStates, newMbStates+numStates, mbStates);
+		fill(newMbStates, newMbStates+numStates, false);
 		cout << "After update " << t << ": ";
 		printBrainStates(mbStates, numStates);
 		cout << endl;
@@ -43,7 +46,7 @@ int main() {
 
 	/********** Testing serialization and deserialization to JSON **********/
 
-	json11::Json gateJSON0 = g.to_json(mbStates);
+	json11::Json gateJSON0 = g.to_json();
 	string gdump0 = gateJSON0.dump();
 	cout << "Gate JSON 0: " << gdump0 << endl;
 
@@ -52,9 +55,9 @@ int main() {
 	cout << "Gate JSON 0 parsed. Error message was \"" << err << "\"" << endl;
 
 	Gate g1;
-	g1.from_json(jsonFromDump0, mbStates);
+	g1.from_json(jsonFromDump0);
 
-	json11::Json gateJSON1 = g1.to_json(mbStates);
+	json11::Json gateJSON1 = g1.to_json();
 	string gdump1 = gateJSON1.dump();
 	cout << "Gate JSON 1: " << gdump1 << endl;
 
@@ -62,38 +65,37 @@ int main() {
 
 	mt19937_64 rng(4223334);
 	const UIntRange inputNumRange {1, 4};
+	const UIntRange inputStatesRange {0, numStates-1};
 	const UIntRange outputNumRange {1, 4};
-	const UIntRange outputStatesRange {0, 4}; // imagining that the last five states are actually brain inputs
+	const UIntRange outputStatesRange {0, numStates/2-1}; // imagining that the last half of states are actually brain inputs
 
 	Gate g2;
 	g2.id = 2;
-	g2.randomize(mbStates, numStates, inputNumRange, outputNumRange, outputStatesRange, rng);
-	json11::Json gateJSON2 = g2.to_json(mbStates);
+	g2.randomize(inputNumRange, inputStatesRange, outputNumRange, outputStatesRange, rng);
+	json11::Json gateJSON2 = g2.to_json();
 	string gdump2 = gateJSON2.dump();
 	cout << "Gate JSON 2: " << gdump2 << endl;
 
 	Gate g3;
 	g3.id = 3;
-	g3.randomize(mbStates, numStates, inputNumRange, outputNumRange, outputStatesRange, rng);
-	json11::Json gateJSON3 = g3.to_json(mbStates);
+	g3.randomize(inputNumRange, inputStatesRange, outputNumRange, outputStatesRange, rng);
+	json11::Json gateJSON3 = g3.to_json();
 	string gdump3 = gateJSON3.dump();
 	cout << "Gate JSON 3: " << gdump3 << endl;
 
 	cout << "Mutating gate 3" << endl;
 
-	g3.rewireAConnectionRandomly(mbStates, numStates, outputStatesRange, rng);
-	gateJSON3 = g3.to_json(mbStates);
+	g3.rewireAConnectionRandomly(inputStatesRange, outputStatesRange, rng);
+	gateJSON3 = g3.to_json();
 	gdump3 = gateJSON3.dump();
 
 	cout << "After rewiring a connection: " << gdump3 << endl;
 
 	g3.modifyTableRandomly(rng);
-	gateJSON3 = g3.to_json(mbStates);
+	gateJSON3 = g3.to_json();
 	gdump3 = gateJSON3.dump();
 
 	cout << "After a table modification: " << gdump3 << endl;
-
-//	string exampleJSONString = "{\"id\":0,\"inputs\":[54,31,30],\"outputs\":[57,62,11],\"table\":[[1,0,0],[1,0,0],[0,1,1],[1,0,0],[1,1,1],[0,0,1],[1,0,0],[0,0,1]],\"type\":\"Deterministic\"}";
 
 	return 0;
 };
