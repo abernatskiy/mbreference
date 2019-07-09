@@ -1,7 +1,8 @@
-#include "mb.h"
-
 #include <iostream>
 #include <cstdlib>
+
+#include "../utils/randutils.h"
+#include "mb.h"
 
 using namespace std;
 using namespace json11;
@@ -68,8 +69,40 @@ void MarkovBrain::makeRandom(const UIntRange& inputsRange, const UIntRange& outp
 		gates.push_back(g);
 	}
 }
-/*
+
 void MarkovBrain::mutate(const UIntRange& inputsRange, const UIntRange& outputsRange, mt19937_64& rng) {
 
+	const UIntRange inputsNumRange MB_GATES_NUM_INPUTS;
+	const UIntRange outputsNumRange MB_GATES_NUM_OUTPUTS;
+
+	const double insertionThreshold = MB_GATE_INSERTION_PROB;
+	const double deletionThreshold = insertionThreshold + MB_GATE_DELETION_PROB;
+	const double duplicationThreshold = deletionThreshold + MB_GATE_DUPLICATION_PROB;
+	const double tableModificationThreshold = duplicationThreshold + (1.-duplicationThreshold) / (1.+MB_GATE_CONNECTION_TO_TABLE_CHANGE_RATIO);
+
+	const double r = sampleZeroToOneDouble(rng);
+	D( cout << "r=" << r; )
+	if(r < insertionThreshold) {
+		Gate g;
+		g.id = nextGateID++;
+		g.randomize(inputsNumRange, inputsRange, outputsNumRange, outputsRange, rng);
+		gates.push_back(g);
+	}
+	else {
+		unsigned idx = sampleUInt(gates.size()-1, rng);
+		D( cout << " idx=" << idx; )
+		if(r < deletionThreshold)
+			gates.erase(gates.begin()+idx);
+		else if(r < duplicationThreshold) {
+			Gate g = gates[sampleUInt(gates.size()-1, rng)];
+			g.id = nextGateID++;
+			gates.push_back(g);
+		}
+		else if(r < tableModificationThreshold)
+			gates[idx].modifyTableRandomly(rng);
+		else
+			gates[idx].rewireAConnectionRandomly(inputsRange, outputsRange, rng);
+	}
+	D( cout << endl; )
 }
-*/
+

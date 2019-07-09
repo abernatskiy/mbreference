@@ -67,5 +67,71 @@ int main() {
 		cout << endl;
 	}
 
+	/********** Mutation **********/
+
+	cout << "Mutating the last brain" << endl;
+	mb1.mutate(inputsRange, outputsRange, rng);
+	cout << mb1.to_json_str() << endl;
+
+	fill(states, states+numStates, false);
+	states[0] = true;
+	printBrainStates(states, numStates);
+	cout << endl;
+	for(unsigned t=0; t<5; t++) {
+		fill(newStates, newStates+numStates, false);
+		mb1.update(states, newStates);
+		copy(newStates, newStates+numStates, states);
+		printBrainStates(states, numStates);
+		cout << endl;
+	}
+
+	cout << "Mutating the last brain" << endl;
+	mb1.mutate(inputsRange, outputsRange, rng);
+	cout << mb1.to_json_str() << endl;
+
+	fill(states, states+numStates, false);
+	states[0] = true;
+	printBrainStates(states, numStates);
+	cout << endl;
+	for(unsigned t=0; t<5; t++) {
+		fill(newStates, newStates+numStates, false);
+		mb1.update(states, newStates);
+		copy(newStates, newStates+numStates, states);
+		printBrainStates(states, numStates);
+		cout << endl;
+	}
+
+	cout << "Mutating the last brain" << endl;
+	mb1.mutate(inputsRange, outputsRange, rng);
+	cout << mb1.to_json_str() << endl;
+
+	fill(states, states+numStates, false);
+	states[0] = true;
+	printBrainStates(states, numStates);
+	cout << endl;
+	for(unsigned t=0; t<5; t++) {
+		fill(newStates, newStates+numStates, false);
+		mb1.update(states, newStates);
+		copy(newStates, newStates+numStates, states);
+		printBrainStates(states, numStates);
+		cout << endl;
+	}
+
+	cout << "Mutating the last brain" << endl;
+	mb1.mutate(inputsRange, outputsRange, rng);
+	cout << mb1.to_json_str() << endl;
+
+	fill(states, states+numStates, false);
+	states[0] = true;
+	printBrainStates(states, numStates);
+	cout << endl;
+	for(unsigned t=0; t<5; t++) {
+		fill(newStates, newStates+numStates, false);
+		mb1.update(states, newStates);
+		copy(newStates, newStates+numStates, states);
+		printBrainStates(states, numStates);
+		cout << endl;
+	}
+
 	return 0;
 }
