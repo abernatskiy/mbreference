@@ -60,10 +60,10 @@ int main() {
 
 	/********** Testing randomization and mutations **********/
 
-	mt19937_64 rng(4223);
+	mt19937_64 rng(4223334);
 	const UIntRange inputNumRange {1, 4};
 	const UIntRange outputNumRange {1, 4};
-	const UIntRange outputStatesRange {0, 5}; // imagining that the last two states are actually brain inputs
+	const UIntRange outputStatesRange {0, 4}; // imagining that the last five states are actually brain inputs
 
 	Gate g2;
 	g2.id = 2;
@@ -78,6 +78,20 @@ int main() {
 	json11::Json gateJSON3 = g3.to_json(mbStates);
 	string gdump3 = gateJSON3.dump();
 	cout << "Gate JSON 3: " << gdump3 << endl;
+
+	cout << "Mutating gate 3" << endl;
+
+	g3.rewireAConnectionRandomly(mbStates, numStates, outputStatesRange, rng);
+	gateJSON3 = g3.to_json(mbStates);
+	gdump3 = gateJSON3.dump();
+
+	cout << "After rewiring a connection: " << gdump3 << endl;
+
+	g3.modifyTableRandomly(rng);
+	gateJSON3 = g3.to_json(mbStates);
+	gdump3 = gateJSON3.dump();
+
+	cout << "After a table modification: " << gdump3 << endl;
 
 //	string exampleJSONString = "{\"id\":0,\"inputs\":[54,31,30],\"outputs\":[57,62,11],\"table\":[[1,0,0],[1,0,0],[0,1,1],[1,0,0],[1,1,1],[0,0,1],[1,0,0],[0,0,1]],\"type\":\"Deterministic\"}";
 

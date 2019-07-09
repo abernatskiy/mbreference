@@ -96,7 +96,7 @@ public:
 	               std::mt19937_64& rng) {
 		const unsigned numInputs = sampleFromUIntRange(inputNumRange, rng);
 		for(unsigned i=0; i<numInputs; i++)
-			inputs.push_back(states + sampleUInt(numStates, rng));
+			inputs.push_back(states + sampleUInt(numStates-1, rng));
 
 		const unsigned numOutputs = sampleFromUIntRange(outputNumRange, rng);
 		for(unsigned j=0; j<numOutputs; j++)
@@ -110,5 +110,25 @@ public:
 			for(unsigned j=0; j<numOutputs; j++)
 				table.back().push_back(sampleBit(rng));
 		}
+	};
+
+	void rewireAConnectionRandomly(bool* states, unsigned numStates, const UIntRange& outputStatesRange, std::mt19937_64& rng) {
+		const unsigned numConnections = inputs.size() + outputs.size();
+		unsigned rawidx = sampleUInt(numConnections-1, rng);
+		if(rawidx < inputs.size())
+			inputs[rawidx] = states + sampleUInt(numStates-1, rng);
+		else
+			outputs[rawidx-inputs.size()] = states + sampleFromUIntRange(outputStatesRange, rng);
+
+		// NOTE: there's no protection from mutation not modifying the same connection if it samples
+		// the same number as was there before. It's the same in MABE (mabe/Brain/MarkovBrain/Gate/AbstractGate.cpp @ mutateConnections())
+	};
+
+	void modifyTableRandomly(std::mt19937_64& rng) {
+		const unsigned row = sampleUInt(table.size()-1, rng);
+		const unsigned column = sampleUInt(outputs.size()-1, rng);
+		table[row][column] = table[row][column] ? false : true;
+
+		// NOTE: simple bitflip is the same as in MABE (mabe/Brain/MarkovBrain/Gate/DeterministicGate.cpp @ mutateInternalStructure())
 	};
 };
