@@ -1,0 +1,14 @@
+Initial brain state: 0000000000
+After update 0: 0100000000
+After update 1: 0010000000
+After update 2: 0100000000
+After update 3: 0010000000
+After update 4: 0100000000
+Gate JSON 0: {"id":8,"inputs":[0,1],"outputs":[1,2],"table":[[1,0],[0,1],[1,0],[0,0]],"type":"Deterministic"}
+Gate JSON 0 parsed. Error message was ""
+Gate JSON 1: {"id":8,"inputs":[0,1],"outputs":[1,2],"table":[[1,0],[0,1],[1,0],[0,0]],"type":"Deterministic"}
+Gate JSON 2: {"id":2,"inputs":[7,0,7,2],"outputs":[0],"table":[[1],[1],[0],[1],[1],[1],[1],[0],[0],[0],[1],[1],[1],[0],[0],[0]],"type":"Deterministic"}
+Gate JSON 3: {"id":3,"inputs":[2,6,8,9],"outputs":[4,3,0],"table":[[0,0,1],[1,1,0],[1,0,1],[0,1,0],[0,1,0],[1,0,0],[1,0,1],[1,1,1],[1,0,1],[0,1,1],[0,0,1],[1,0,1],[1,0,0],[1,0,0],[1,1,0],[0,1,1]],"type":"Deterministic"}
+Mutating gate 3
+After rewiring a connection: {"id":3,"inputs":[2,6,7,9],"outputs":[4,3,0],"table":[[0,0,1],[1,1,0],[1,0,1],[0,1,0],[0,1,0],[1,0,0],[1,0,1],[1,1,1],[1,0,1],[0,1,1],[0,0,1],[1,0,1],[1,0,0],[1,0,0],[1,1,0],[0,1,1]],"type":"Deterministic"}
+After a table modification: {"id":3,"inputs":[2,6,7,9],"outputs":[4,3,0],"table":[[0,0,1],[1,1,0],[1,0,1],[0,1,0],[0,1,0],[1,0,0],[1,0,1],[1,1,1],[1,0,1],[0,1,1],[0,1,1],[1,0,1],[1,0,0],[1,0,0],[1,1,0],[0,1,1]],"type":"Deterministic"}

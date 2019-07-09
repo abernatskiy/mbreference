@@ -10,11 +10,11 @@ typedef std::pair<unsigned,unsigned> UIntRange;
 
 /********** Auxiliary functions **********/
 
-unsigned upow2(unsigned power) {
+inline unsigned upow2(unsigned power) {
 	return 1u << power;
 };
 
-unsigned decodeUInt(const std::vector<bool>& bits) {
+inline unsigned decodeUInt(const std::vector<bool>& bits) {
 	unsigned answer = 0;
 	for(const auto& bit : bits) {
 		answer <<= 1;
@@ -23,15 +23,15 @@ unsigned decodeUInt(const std::vector<bool>& bits) {
 	return answer;
 };
 
-unsigned sampleFromUIntRange(const UIntRange& range, std::mt19937_64& rng) {
+inline unsigned sampleFromUIntRange(const UIntRange& range, std::mt19937_64& rng) {
 	return std::uniform_int_distribution<unsigned>(range.first, range.second)(rng);
 };
 
-unsigned sampleUInt(unsigned maxVal, std::mt19937_64& rng) {
+inline unsigned sampleUInt(unsigned maxVal, std::mt19937_64& rng) {
 	return std::uniform_int_distribution<unsigned>(0, maxVal)(rng);
 };
 
-bool sampleBit(std::mt19937_64& rng) {
+inline bool sampleBit(std::mt19937_64& rng) {
 	return std::bernoulli_distribution(0.5)(rng);
 };
 
