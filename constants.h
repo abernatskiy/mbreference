@@ -1,5 +1,8 @@
 #pragma once
 
+#define MB_GATES_NUM_INPUTS {1, 4}
+#define MB_GATES_NUM_OUTPUTS {1, 4}
+
 // #define EVALUATIONS_TO_OPTIMIZE {"avgDist", "stuckness"}
 #define EVALUATIONS_TO_OPTIMIZE {"avgDist"}
 

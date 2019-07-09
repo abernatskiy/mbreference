@@ -3,6 +3,7 @@
 #include <vector>
 #include <utility>
 #include <random>
+// #include <iostream> // debug only
 
 #include "../utils/json11/json11.hpp"
 
@@ -49,8 +50,11 @@ public:
 		for(unsigned i=0; i<inputShifts.size(); i++)
 			key[i] = states[inputShifts[i]];
 		unsigned ukey = decodeUInt(key);
-		for(unsigned j=0; j<outputShifts.size(); j++)
+		for(unsigned j=0; j<outputShifts.size(); j++) {
 			newStates[outputShifts[j]] = newStates[outputShifts[j]] || table[ukey][j];
+//			if(table[ukey][j])
+//				std::cout << "Gate " << id << " wrote 1 into state " << outputShifts[j] << std::endl;
+		}
 	};
 
 	json11::Json to_json() const {

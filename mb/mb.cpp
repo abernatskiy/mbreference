@@ -55,11 +55,20 @@ std::string MarkovBrain::to_json_str() const {
 	return to_json().dump();
 }
 
-/*
 void MarkovBrain::makeRandom(const UIntRange& inputsRange, const UIntRange& outputsRange, unsigned numGates, mt19937_64& rng) {
+	gates.clear();
+	nextGateID = 0;
 
+	const UIntRange inputsNumRange MB_GATES_NUM_INPUTS;
+	const UIntRange outputsNumRange MB_GATES_NUM_OUTPUTS;
+	for(unsigned i=0; i<numGates; i++) {
+		Gate g;
+		g.id = nextGateID++;
+		g.randomize(inputsNumRange, inputsRange, outputsNumRange, outputsRange, rng);
+		gates.push_back(g);
+	}
 }
-
+/*
 void MarkovBrain::mutate(const UIntRange& inputsRange, const UIntRange& outputsRange, mt19937_64& rng) {
 
 }

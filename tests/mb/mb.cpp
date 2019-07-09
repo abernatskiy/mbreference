@@ -45,10 +45,27 @@ int main() {
 
 	/********** Randomization **********/
 
-//	unsigned numSensors = 1;
-//	const UIntRange inputsRange {0, numStates-1};
-//	const UIntRange outputsRange {1, numStates-1};
+	const unsigned numSensors = 1;
+	const UIntRange inputsRange {0, numStates-1};
+	const UIntRange outputsRange {numSensors, numStates-1};
 
+	MarkovBrain mb1;
+	mt19937_64 rng(324324);
+	mb1.makeRandom(inputsRange, outputsRange, 5, rng);
+
+	cout << mb1.to_json_str() << endl;
+
+	fill(states, states+numStates, false);
+	states[0] = true;
+	printBrainStates(states, numStates);
+	cout << endl;
+	for(unsigned t=0; t<5; t++) {
+		fill(newStates, newStates+numStates, false);
+		mb1.update(states, newStates);
+		copy(newStates, newStates+numStates, states);
+		printBrainStates(states, numStates);
+		cout << endl;
+	}
 
 	return 0;
 }
