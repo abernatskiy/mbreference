@@ -6,37 +6,8 @@
 // #include <iostream> // debug only
 
 #include "../utils/json11/json11.hpp"
-
-typedef std::pair<unsigned,unsigned> UIntRange;
-
-/********** Auxiliary functions **********/
-
-inline unsigned upow2(unsigned power) {
-	return 1u << power;
-};
-
-inline unsigned decodeUInt(const std::vector<bool>& bits) {
-	unsigned answer = 0;
-	for(const auto& bit : bits) {
-		answer <<= 1;
-		answer += (bit ? 1 : 0);
-	}
-	return answer;
-};
-
-inline unsigned sampleFromUIntRange(const UIntRange& range, std::mt19937_64& rng) {
-	return std::uniform_int_distribution<unsigned>(range.first, range.second)(rng);
-};
-
-inline unsigned sampleUInt(unsigned maxVal, std::mt19937_64& rng) {
-	return std::uniform_int_distribution<unsigned>(0, maxVal)(rng);
-};
-
-inline bool sampleBit(std::mt19937_64& rng) {
-	return std::bernoulli_distribution(0.5)(rng);
-};
-
-/********** Gate class declaration/definition **********/
+#include "../utils/randutils.h"
+#include "../utils/bitutils.h"
 
 class Gate {
 public:
