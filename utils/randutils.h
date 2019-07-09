@@ -1,5 +1,7 @@
 #pragma once
 
+#include <random>
+
 typedef std::pair<unsigned,unsigned> UIntRange;
 
 inline unsigned sampleFromUIntRange(const UIntRange& range, std::mt19937_64& rng) {
