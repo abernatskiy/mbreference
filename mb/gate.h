@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream> // for now for debug only
-
 #include <vector>
 #include <utility>
 #include <random>
