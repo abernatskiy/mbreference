@@ -25,4 +25,6 @@ public:
 	std::string to_json_str() const;
 	void makeRandom(const UIntRange& inputsRange, const UIntRange& outputsRange, unsigned numGates, std::mt19937_64& rng);
 	void mutate(const UIntRange& inputsRange, const UIntRange& outputsRange, std::mt19937_64& rng);
+	void saveMABEMetadata(unsigned numInputs, unsigned numOutputs, unsigned numHidden);
+	bool validateMABEMetadata(unsigned numInputs, unsigned numOutputs, unsigned numHidden) const;
 };

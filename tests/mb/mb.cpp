@@ -133,5 +133,12 @@ int main() {
 		cout << endl;
 	}
 
+	/********** Metadata handling **********/
+
+	mb1.saveMABEMetadata(23,32,45);
+	cout << "The last brain after adding metadata:" << endl << mb1.to_json_str() << endl;
+	cout << "Validation with the right numbers: " << (mb1.validateMABEMetadata(23,32,45) ? "OK" : "FAIL") << endl;
+	cout << "Validation with the wrong numbers: " << (mb1.validateMABEMetadata(2323,32,45) ? "OK" : "FAIL") << endl;
+
 	return 0;
 }

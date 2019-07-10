@@ -106,3 +106,14 @@ void MarkovBrain::mutate(const UIntRange& inputsRange, const UIntRange& outputsR
 	D( cout << endl; )
 }
 
+void MarkovBrain::saveMABEMetadata(unsigned numInputs, unsigned numOutputs, unsigned numHidden) {
+	metadata["numInputs"] = static_cast<int>(numInputs);
+	metadata["numOutputs"] = static_cast<int>(numOutputs);
+	metadata["numHidden"] = static_cast<int>(numHidden);
+}
+
+bool MarkovBrain::validateMABEMetadata(unsigned numInputs, unsigned numOutputs, unsigned numHidden) const {
+	return metadata.at("numInputs").int_value() == numInputs &&
+	       metadata.at("numOutputs").int_value() == numOutputs &&
+	       metadata.at("numHidden").int_value() == numHidden;
+}
