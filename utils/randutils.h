@@ -2,7 +2,7 @@
 
 #include <random>
 
-typedef std::pair<unsigned,unsigned> UIntRange;
+#include "mbreftypes.h"
 
 inline unsigned sampleFromUIntRange(const UIntRange& range, std::mt19937_64& rng) {
 	return std::uniform_int_distribution<unsigned>(range.first, range.second)(rng);
