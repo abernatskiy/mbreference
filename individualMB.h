@@ -18,6 +18,8 @@ private:
 	static const unsigned numMotors = DIGITS5X5NUMDISTINCTLABELS*(1+INDIVIDUAL_MB_VETO_BITS);
 	static const unsigned numHidden = INDIVIDUAL_MB_HIDDEN_NODES;
 	static const unsigned numStates = numSensors + numMotors + numHidden;
+	static const UIntRange mbInputsRange {0, numStates-1};
+	static const UIntRange mbOutputsRange {numSensors, numStates-1};
 
 	bool states[numStates];
 	bool newStates[numStates];

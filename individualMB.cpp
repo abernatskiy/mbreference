@@ -1,23 +1,46 @@
+#include <iostream>
+#include <cstdlib>
+
+#include "utils/json11/json11.hpp"
+
 #include "individualMB.h"
 
 using namespace std;
+using namespace json11;
 
 /********** Public definitions ***********/
 
 string MarkovBrainIndividual::genomeStr() const override {
+	Json indivJSON { { "brains", { "root::", mb.to_json() } },
+	                 { "data_map", evals },
+	                 { "genomes", Json::array() },
+	                 { "id", id }
+	//                 { "parent_ids", Json::array() } // omitting the field to make it clear that parent tracking is not yet implemented
+	               };
+	return indivJSON.dump();
 
 }
 
 void MarkovBrainIndividual::loadGenomeStr(string str) override {
-
+	Json indivJSON = Json::parse(str);
+	mb.from_json(indivJSON["brains"]["root::"], true);
+	if(!mb.validateMABEMetadata(numSensors, numMotors, numHidden)) {
+		cerr << "Disagreement between the loaded brain state ranges and mbreference task settings detected, exiting" << endl;
+		exit(EXIT_FAILURE);
+	}
+	id = indivJSON["id"].int_value();
+	evals["negScore"] = indivJSON["data_map"]["negScore"].number_value(); // NOTE: might want to add more or even all of them
+	evals["mbg"] = indivJSON["data_map"]["mbg"].number_value();
 }
 
 void MarkovBrainIndividual::randomize(mt19937_64& rng) override {
-
+	mb.makeRandom(mbInputsRange, mbOutputsRange, INDIVIDUAL_MB_INITIAL_GATES, rng);
+	mb.saveMABEMetadata(numSensors, numMotors, numHidden);
 }
 
 bool MarkovBrainIndividual::mutate(mt19937_64& rng) override {
-
+	mb.mutate(mbInputsRange, mbOutputsRange, rng);
+	return true; // TODO: consider the consequences of this
 }
 
 void MarkovBrainIndividual::evaluate() override {
