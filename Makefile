@@ -52,3 +52,5 @@ tests/individualMB: constants.h individualMB.h individualMB.cpp evolution/indivi
 
 clean:
 	rm -f ${BINARY} ${BINARY}.note build/*.o build/evolution/*.o
+clean-tests:
+	rm -f tests/evolution/individual tests/evolution/evolver tests/evolution/evolverMAFPO tests/mb/gate tests/mb/mb tests/individualMB
