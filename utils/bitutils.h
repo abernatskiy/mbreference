@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 inline unsigned upow2(unsigned power) {
 	return 1u << power;
 };
