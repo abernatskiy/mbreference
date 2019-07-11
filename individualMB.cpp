@@ -8,23 +8,35 @@
 using namespace std;
 using namespace json11;
 
+const std::vector<std::vector<bool>> MarkovBrainIndividual::percepts DIGITS5X5PERCEPTS;
+const std::vector<unsigned> MarkovBrainIndividual::labels DIGITS5X5LABELS;
+const UIntRange MarkovBrainIndividual::mbInputsRange {0, _INDIVIDUAL_MB_NUM_TOTAL-1};
+const UIntRange MarkovBrainIndividual::mbOutputsRange {_INDIVIDUAL_MB_NUM_SENSORS, _INDIVIDUAL_MB_NUM_TOTAL-1};
+
 /********** Public definitions ***********/
 
-string MarkovBrainIndividual::genomeStr() const override {
-	Json indivJSON { { "brains", { "root::", mb.to_json() } },
-	                 { "data_map", evals },
-	                 { "genomes", Json::array() },
-	                 { "id", id }
-	//                 { "parent_ids", Json::array() } // omitting the field to make it clear that parent tracking is not yet implemented
-	               };
-	return indivJSON.dump();
+string MarkovBrainIndividual::genomeStr() const {
+	Json::object indivJSON { { "brains", Json::object {{ "root::", mb.to_json() }} },
+	                         { "data_map", evals },
+	                         { "genomes", Json::array() },
+	                         { "id", static_cast<int>(id) }
+//	                         { "parent_ids", Json::array() } // omitting the field to make it clear that parent tracking is not yet implemented
+	                       };
+	return Json(indivJSON).dump();
 
 }
 
-void MarkovBrainIndividual::loadGenomeStr(string str) override {
-	Json indivJSON = Json::parse(str);
+void MarkovBrainIndividual::loadGenomeStr(string str) {
+	string parseError;
+	Json indivJSON = Json::parse(str, parseError);
+
+	if(!parseError.empty()) {
+		cerr << "Individual JSON parsing failed with message " << parseError << endl;
+		exit(EXIT_FAILURE);
+	}
+
 	mb.from_json(indivJSON["brains"]["root::"], true);
-	if(!mb.validateMABEMetadata(numSensors, numMotors, numHidden)) {
+	if(!mb.validateMABEMetadata(_INDIVIDUAL_MB_NUM_SENSORS, _INDIVIDUAL_MB_NUM_MOTORS, _INDIVIDUAL_MB_NUM_HIDDEN)) {
 		cerr << "Disagreement between the loaded brain state ranges and mbreference task settings detected, exiting" << endl;
 		exit(EXIT_FAILURE);
 	}
@@ -33,37 +45,37 @@ void MarkovBrainIndividual::loadGenomeStr(string str) override {
 	evals["mbg"] = indivJSON["data_map"]["mbg"].number_value();
 }
 
-void MarkovBrainIndividual::randomize(mt19937_64& rng) override {
+void MarkovBrainIndividual::randomize(mt19937_64& rng) {
 	mb.makeRandom(mbInputsRange, mbOutputsRange, INDIVIDUAL_MB_INITIAL_GATES, rng);
-	mb.saveMABEMetadata(numSensors, numMotors, numHidden);
+	mb.saveMABEMetadata(_INDIVIDUAL_MB_NUM_SENSORS, _INDIVIDUAL_MB_NUM_MOTORS, _INDIVIDUAL_MB_NUM_HIDDEN);
 }
 
-bool MarkovBrainIndividual::mutate(mt19937_64& rng) override {
+bool MarkovBrainIndividual::mutate(mt19937_64& rng) {
 	mb.mutate(mbInputsRange, mbOutputsRange, rng);
 	return true; // TODO: consider the consequences of this
 }
 
-void MarkovBrainIndividual::evaluate() override {
+void MarkovBrainIndividual::evaluate() {
 
 	double score = 0.;
 	for(unsigned perceptIdx=0; perceptIdx<percepts.size(); perceptIdx++) {
 
 		// Simulating brain for a while, showing it the current percept
-		fill(states, states+numStates, false);
+		fill(states, states+_INDIVIDUAL_MB_NUM_TOTAL, false);
 		for(unsigned t=0; t<=INDIVIDUAL_MB_TIME_STEPS; t++) {
-			fill(newStates, newStates+numStates, false);
+			fill(newStates, newStates+_INDIVIDUAL_MB_NUM_TOTAL, false);
 			copy(percepts[perceptIdx].begin(), percepts[perceptIdx].end(), states); // not to newStates cause we want the brain to see right away
 			mb.update(states, newStates);
-			copy(newStates, newStates+numStates, states);
+			copy(newStates, newStates+_INDIVIDUAL_MB_NUM_TOTAL, states);
 			// TODO: add break condition here if trigger bits are used
 		}
 
 		// Reading outputs and determining the numbers that were output
-		bool* outputs = states + numSensors;
+		bool* outputs = states + _INDIVIDUAL_MB_NUM_SENSORS;
 		bool rightAnswerGiven = false;
 		unsigned numAnswers = 0;
 		unsigned curLabel = 0;
-		for(bool* curOut=states+numSensors; curOut<states+numSensors+numMotors; curOut+=(INDIVIDUAL_MB_VETO_BITS+1)) {
+		for(bool* curOut=states+_INDIVIDUAL_MB_NUM_SENSORS; curOut<states+_INDIVIDUAL_MB_NUM_SENSORS+_INDIVIDUAL_MB_NUM_MOTORS; curOut+=(INDIVIDUAL_MB_VETO_BITS+1)) {
 			bool veto = false;
 			for(unsigned i=0; i<INDIVIDUAL_MB_VETO_BITS; i++)
 				veto = veto || (curOut[i]);

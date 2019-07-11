@@ -1,8 +1,8 @@
 #pragma once
 
 // mb/gate.h definitions
-#define MB_GATES_NUM_INPUTS {1, 4}
-#define MB_GATES_NUM_OUTPUTS {1, 4}
+#define MB_GATES_NUM_INPUTS {1, 2}
+#define MB_GATES_NUM_OUTPUTS {1, 2}
 
 // mb/mb.h|.cpp definitions
 #define MB_GATE_INSERTION_PROB 0.1
@@ -14,7 +14,7 @@
 #define INDIVIDUAL_MB_VETO_BITS 1
 #define INDIVIDUAL_MB_TIME_STEPS 30
 #define INDIVIDUAL_MB_HIDDEN_NODES 10
-#define INDIVIDUAL_MB_INITIAL_GATES 10
+#define INDIVIDUAL_MB_INITIAL_GATES 2
 
 // evolution/* definitions
 #define EVALUATIONS_TO_OPTIMIZE {"avgDist"}

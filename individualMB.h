@@ -7,22 +7,22 @@
 #include "task/digits5by5.h"
 #include "constants.h"
 
+#define _INDIVIDUAL_MB_NUM_SENSORS DIGITS5X5PERCEPTSIZE
+#define _INDIVIDUAL_MB_NUM_MOTORS DIGITS5X5NUMDISTINCTLABELS*(1+INDIVIDUAL_MB_VETO_BITS)
+#define _INDIVIDUAL_MB_NUM_HIDDEN INDIVIDUAL_MB_HIDDEN_NODES
+#define _INDIVIDUAL_MB_NUM_TOTAL _INDIVIDUAL_MB_NUM_SENSORS+_INDIVIDUAL_MB_NUM_MOTORS+_INDIVIDUAL_MB_NUM_HIDDEN
+
 class MarkovBrainIndividual : public Individual {
 private:
 	MarkovBrain mb;
 
-	// All task-specific macros should be confined in this section
-	static const std::vector<std::vector<bool>> percepts DIGITS5X5PERCEPTS;
-	static const std::vector<unsigned> labels DIGITS5X5LABELS;
-	static const unsigned numSensors = DIGITS5X5PERCEPTSIZE;
-	static const unsigned numMotors = DIGITS5X5NUMDISTINCTLABELS*(1+INDIVIDUAL_MB_VETO_BITS);
-	static const unsigned numHidden = INDIVIDUAL_MB_HIDDEN_NODES;
-	static const unsigned numStates = numSensors + numMotors + numHidden;
-	static const UIntRange mbInputsRange {0, numStates-1};
-	static const UIntRange mbOutputsRange {numSensors, numStates-1};
+	static const std::vector<std::vector<bool>> percepts; // initialized to DIGITS5X5PERCEPTS in individualMB.cpp
+	static const std::vector<unsigned> labels; // initialized to DIGITS5X5LABELS in individualMB.cpp
+	static const UIntRange mbInputsRange; // initialized to {0, _INDIVIDUAL_MB_NUM_TOTAL-1}
+	static const UIntRange mbOutputsRange; // initialized to {_INDIVIDUAL_MB_NUM_SENSORS, _INDIVIDUAL_MB_NUM_TOTAL-1}
 
-	bool states[numStates];
-	bool newStates[numStates];
+	bool states[_INDIVIDUAL_MB_NUM_TOTAL];
+	bool newStates[_INDIVIDUAL_MB_NUM_TOTAL];
 
 public:
 	std::string genomeStr() const override;
