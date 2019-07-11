@@ -5,50 +5,46 @@
 0000000000
 0000000000
 0000000000
-{"gates":[{"id":0,"inputs":[8,7,3],"outputs":[8,4,3,9],"table":[[1,0,1,0],[1,1,1,0],[1,0,0,1],[0,0,0,0],[1,0,1,1],[1,1,0,1],[1,1,0,1],[0,1,1,1]],"type":"Deterministic"},{"id":1,"inputs":[6,8,2],"outputs":[9,2],"table":[[0,1],[1,0],[1,0],[1,1],[0,1],[1,1],[0,0],[1,1]],"type":"Deterministic"},{"id":2,"inputs":[6,7,0],"outputs":[7,8],"table":[[0,1],[0,0],[1,1],[0,1],[0,0],[0,1],[1,1],[1,1]],"type":"Deterministic"},{"id":3,"inputs":[0,5],"outputs":[4,4],"table":[[1,1],[0,1],[1,1],[1,0]],"type":"Deterministic"},{"id":4,"inputs":[4,7,1,7],"outputs":[9],"table":[[0],[1],[1],[1],[0],[0],[1],[0],[0],[0],[0],[1],[0],[1],[0],[0]],"type":"Deterministic"}]}
+{"gates":[{"id":0,"inputs":[8,7],"outputs":[9],"table":[[0],[1],[1],[0]],"type":"Deterministic"},{"id":1,"inputs":[5],"outputs":[8],"table":[[1],[1]],"type":"Deterministic"},{"id":2,"inputs":[5],"outputs":[7],"table":[[0],[1]],"type":"Deterministic"},{"id":3,"inputs":[6,7],"outputs":[5,8],"table":[[1,1],[1,1],[0,1],[1,1]],"type":"Deterministic"},{"id":4,"inputs":[0,7],"outputs":[4],"table":[[1],[0],[0],[0]],"type":"Deterministic"}]}
 1000000000
-0011100010
-0010100011
-0011100011
-0010100011
-0011100011
+0000010010
+0000110111
+0000010110
+0000010110
+0000010110
 Mutating the last brain
-r=0.3148 idx=0
-{"gates":[{"id":0,"inputs":[8,7,3],"outputs":[8,4,3,9],"table":[[1,0,1,0],[1,1,1,0],[1,0,0,1],[0,0,0,0],[1,0,1,1],[1,1,0,1],[1,1,0,1],[0,1,1,1]],"type":"Deterministic"},{"id":1,"inputs":[6,8,2],"outputs":[9,2],"table":[[0,1],[1,0],[1,0],[1,1],[0,1],[1,1],[0,0],[1,1]],"type":"Deterministic"},{"id":2,"inputs":[6,7,0],"outputs":[7,8],"table":[[0,1],[0,0],[1,1],[0,1],[0,0],[0,1],[1,1],[1,1]],"type":"Deterministic"},{"id":3,"inputs":[0,5],"outputs":[4,4],"table":[[1,1],[0,1],[1,1],[1,0]],"type":"Deterministic"},{"id":4,"inputs":[4,7,1,7],"outputs":[9],"table":[[0],[1],[1],[1],[0],[0],[1],[0],[0],[0],[0],[1],[0],[1],[0],[0]],"type":"Deterministic"},{"id":5,"inputs":[4,7,1,7],"outputs":[9],"table":[[0],[1],[1],[1],[0],[0],[1],[0],[0],[0],[0],[1],[0],[1],[0],[0]],"type":"Deterministic"}]}
+{"gates":[{"id":0,"inputs":[8,7],"outputs":[9],"table":[[0],[1],[1],[0]],"type":"Deterministic"},{"id":1,"inputs":[5],"outputs":[8],"table":[[1],[1]],"type":"Deterministic"},{"id":2,"inputs":[5],"outputs":[7],"table":[[0],[1]],"type":"Deterministic"},{"id":3,"inputs":[6,7],"outputs":[5,8],"table":[[1,1],[1,1],[0,1],[1,1]],"type":"Deterministic"},{"id":4,"inputs":[0,7],"outputs":[4],"table":[[1],[0],[0],[0]],"type":"Deterministic"},{"id":5,"inputs":[5],"outputs":[8],"table":[[1],[1]],"type":"Deterministic"}]}
 1000000000
-0011100010
-0010100011
-0011100011
-0010100011
-0011100011
+0000010010
+0000110111
+0000010110
+0000010110
+0000010110
 Mutating the last brain
-r=0.959352 idx=3
-{"gates":[{"id":0,"inputs":[8,7,3],"outputs":[8,4,3,9],"table":[[1,0,1,0],[1,1,1,0],[1,0,0,1],[0,0,0,0],[1,0,1,1],[1,1,0,1],[1,1,0,1],[0,1,1,1]],"type":"Deterministic"},{"id":1,"inputs":[6,8,2],"outputs":[9,2],"table":[[0,1],[1,0],[1,0],[1,1],[0,1],[1,1],[0,0],[1,1]],"type":"Deterministic"},{"id":2,"inputs":[6,7,0],"outputs":[7,8],"table":[[0,1],[0,0],[1,1],[0,1],[0,0],[0,1],[1,1],[1,1]],"type":"Deterministic"},{"id":3,"inputs":[0,5],"outputs":[3,4],"table":[[1,1],[0,1],[1,1],[1,0]],"type":"Deterministic"},{"id":4,"inputs":[4,7,1,7],"outputs":[9],"table":[[0],[1],[1],[1],[0],[0],[1],[0],[0],[0],[0],[1],[0],[1],[0],[0]],"type":"Deterministic"},{"id":5,"inputs":[4,7,1,7],"outputs":[9],"table":[[0],[1],[1],[1],[0],[0],[1],[0],[0],[0],[0],[1],[0],[1],[0],[0]],"type":"Deterministic"}]}
+{"gates":[{"id":0,"inputs":[8,7],"outputs":[9],"table":[[0],[1],[1],[0]],"type":"Deterministic"},{"id":1,"inputs":[5],"outputs":[2],"table":[[1],[1]],"type":"Deterministic"},{"id":2,"inputs":[5],"outputs":[7],"table":[[0],[1]],"type":"Deterministic"},{"id":3,"inputs":[6,7],"outputs":[5,8],"table":[[1,1],[1,1],[0,1],[1,1]],"type":"Deterministic"},{"id":4,"inputs":[0,7],"outputs":[4],"table":[[1],[0],[0],[0]],"type":"Deterministic"},{"id":5,"inputs":[5],"outputs":[8],"table":[[1],[1]],"type":"Deterministic"}]}
 1000000000
-0011100010
-0011100011
-0011100011
-0011100011
-0011100011
+0010010010
+0010110111
+0010010110
+0010010110
+0010010110
 Mutating the last brain
-r=0.0983426
-{"gates":[{"id":0,"inputs":[8,7,3],"outputs":[8,4,3,9],"table":[[1,0,1,0],[1,1,1,0],[1,0,0,1],[0,0,0,0],[1,0,1,1],[1,1,0,1],[1,1,0,1],[0,1,1,1]],"type":"Deterministic"},{"id":1,"inputs":[6,8,2],"outputs":[9,2],"table":[[0,1],[1,0],[1,0],[1,1],[0,1],[1,1],[0,0],[1,1]],"type":"Deterministic"},{"id":2,"inputs":[6,7,0],"outputs":[7,8],"table":[[0,1],[0,0],[1,1],[0,1],[0,0],[0,1],[1,1],[1,1]],"type":"Deterministic"},{"id":3,"inputs":[0,5],"outputs":[3,4],"table":[[1,1],[0,1],[1,1],[1,0]],"type":"Deterministic"},{"id":4,"inputs":[4,7,1,7],"outputs":[9],"table":[[0],[1],[1],[1],[0],[0],[1],[0],[0],[0],[0],[1],[0],[1],[0],[0]],"type":"Deterministic"},{"id":5,"inputs":[4,7,1,7],"outputs":[9],"table":[[0],[1],[1],[1],[0],[0],[1],[0],[0],[0],[0],[1],[0],[1],[0],[0]],"type":"Deterministic"},{"id":6,"inputs":[1,4],"outputs":[6,6,6],"table":[[0,0,0],[0,0,0],[1,1,0],[1,0,0]],"type":"Deterministic"}]}
+{"gates":[{"id":0,"inputs":[8,7],"outputs":[9],"table":[[0],[1],[1],[0]],"type":"Deterministic"},{"id":1,"inputs":[5],"outputs":[2],"table":[[1],[1]],"type":"Deterministic"},{"id":2,"inputs":[5],"outputs":[7],"table":[[0],[1]],"type":"Deterministic"},{"id":3,"inputs":[6,7],"outputs":[5,8],"table":[[1,1],[1,1],[0,1],[1,1]],"type":"Deterministic"},{"id":4,"inputs":[0,7],"outputs":[4],"table":[[1],[0],[0],[0]],"type":"Deterministic"},{"id":5,"inputs":[5],"outputs":[8],"table":[[1],[1]],"type":"Deterministic"},{"id":6,"inputs":[3,8],"outputs":[1],"table":[[0],[1],[1],[1]],"type":"Deterministic"}]}
 1000000000
-0011100010
-0011100011
-0011100011
-0011100011
-0011100011
+0010010010
+0110110111
+0110010110
+0110010110
+0110010110
 Mutating the last brain
-r=0.162202 idx=2
-{"gates":[{"id":0,"inputs":[8,7,3],"outputs":[8,4,3,9],"table":[[1,0,1,0],[1,1,1,0],[1,0,0,1],[0,0,0,0],[1,0,1,1],[1,1,0,1],[1,1,0,1],[0,1,1,1]],"type":"Deterministic"},{"id":1,"inputs":[6,8,2],"outputs":[9,2],"table":[[0,1],[1,0],[1,0],[1,1],[0,1],[1,1],[0,0],[1,1]],"type":"Deterministic"},{"id":3,"inputs":[0,5],"outputs":[3,4],"table":[[1,1],[0,1],[1,1],[1,0]],"type":"Deterministic"},{"id":4,"inputs":[4,7,1,7],"outputs":[9],"table":[[0],[1],[1],[1],[0],[0],[1],[0],[0],[0],[0],[1],[0],[1],[0],[0]],"type":"Deterministic"},{"id":5,"inputs":[4,7,1,7],"outputs":[9],"table":[[0],[1],[1],[1],[0],[0],[1],[0],[0],[0],[0],[1],[0],[1],[0],[0]],"type":"Deterministic"},{"id":6,"inputs":[1,4],"outputs":[6,6,6],"table":[[0,0,0],[0,0,0],[1,1,0],[1,0,0]],"type":"Deterministic"}]}
+{"gates":[{"id":0,"inputs":[8,7],"outputs":[9],"table":[[0],[1],[1],[0]],"type":"Deterministic"},{"id":1,"inputs":[5],"outputs":[2],"table":[[1],[1]],"type":"Deterministic"},{"id":2,"inputs":[5],"outputs":[7],"table":[[0],[1]],"type":"Deterministic"},{"id":3,"inputs":[3,7],"outputs":[5,8],"table":[[1,1],[1,1],[0,1],[1,1]],"type":"Deterministic"},{"id":4,"inputs":[0,7],"outputs":[4],"table":[[1],[0],[0],[0]],"type":"Deterministic"},{"id":5,"inputs":[5],"outputs":[8],"table":[[1],[1]],"type":"Deterministic"},{"id":6,"inputs":[3,8],"outputs":[1],"table":[[0],[1],[1],[1]],"type":"Deterministic"}]}
 1000000000
-0011100010
-0011100011
-0011100011
-0011100011
-0011100011
+0010010010
+0110110111
+0110010110
+0110010110
+0110010110
 The last brain after adding metadata:
-{"gates":[{"id":0,"inputs":[8,7,3],"outputs":[8,4,3,9],"table":[[1,0,1,0],[1,1,1,0],[1,0,0,1],[0,0,0,0],[1,0,1,1],[1,1,0,1],[1,1,0,1],[0,1,1,1]],"type":"Deterministic"},{"id":1,"inputs":[6,8,2],"outputs":[9,2],"table":[[0,1],[1,0],[1,0],[1,1],[0,1],[1,1],[0,0],[1,1]],"type":"Deterministic"},{"id":3,"inputs":[0,5],"outputs":[3,4],"table":[[1,1],[0,1],[1,1],[1,0]],"type":"Deterministic"},{"id":4,"inputs":[4,7,1,7],"outputs":[9],"table":[[0],[1],[1],[1],[0],[0],[1],[0],[0],[0],[0],[1],[0],[1],[0],[0]],"type":"Deterministic"},{"id":5,"inputs":[4,7,1,7],"outputs":[9],"table":[[0],[1],[1],[1],[0],[0],[1],[0],[0],[0],[0],[1],[0],[1],[0],[0]],"type":"Deterministic"},{"id":6,"inputs":[1,4],"outputs":[6,6,6],"table":[[0,0,0],[0,0,0],[1,1,0],[1,0,0]],"type":"Deterministic"}],"numHidden":45,"numInputs":23,"numOutputs":32}
+{"gates":[{"id":0,"inputs":[8,7],"outputs":[9],"table":[[0],[1],[1],[0]],"type":"Deterministic"},{"id":1,"inputs":[5],"outputs":[2],"table":[[1],[1]],"type":"Deterministic"},{"id":2,"inputs":[5],"outputs":[7],"table":[[0],[1]],"type":"Deterministic"},{"id":3,"inputs":[3,7],"outputs":[5,8],"table":[[1,1],[1,1],[0,1],[1,1]],"type":"Deterministic"},{"id":4,"inputs":[0,7],"outputs":[4],"table":[[1],[0],[0],[0]],"type":"Deterministic"},{"id":5,"inputs":[5],"outputs":[8],"table":[[1],[1]],"type":"Deterministic"},{"id":6,"inputs":[3,8],"outputs":[1],"table":[[0],[1],[1],[1]],"type":"Deterministic"}],"numHidden":45,"numInputs":23,"numOutputs":32}
 Validation with the right numbers: OK
 Validation with the wrong numbers: FAIL

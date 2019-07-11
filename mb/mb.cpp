@@ -81,29 +81,35 @@ void MarkovBrain::mutate(const UIntRange& inputsRange, const UIntRange& outputsR
 	const double tableModificationThreshold = duplicationThreshold + (1.-duplicationThreshold) / (1.+MB_GATE_CONNECTION_TO_TABLE_CHANGE_RATIO);
 
 	const double r = sampleZeroToOneDouble(rng);
-	D( cout << "r=" << r; )
+//	D( cout << "r=" << r << endl; )
 	if(r < insertionThreshold) {
 		Gate g;
 		g.id = nextGateID++;
 		g.randomize(inputsNumRange, inputsRange, outputsNumRange, outputsRange, rng);
 		gates.push_back(g);
+//		D( cout << "Inserted a gate" << endl; )
 	}
 	else {
 		unsigned idx = sampleUInt(gates.size()-1, rng);
-		D( cout << " idx=" << idx; )
-		if(r < deletionThreshold)
+		if(r < deletionThreshold) {
 			gates.erase(gates.begin()+idx);
+//			D( cout << "Removed gate " << idx <<  endl; )
+		}
 		else if(r < duplicationThreshold) {
-			Gate g = gates[sampleUInt(gates.size()-1, rng)];
+			Gate g = gates[idx];
 			g.id = nextGateID++;
 			gates.push_back(g);
+//			D( cout << "Duplicated gate " << idx << endl; )
 		}
-		else if(r < tableModificationThreshold)
+		else if(r < tableModificationThreshold) {
 			gates[idx].modifyTableRandomly(rng);
-		else
+//			D( cout << "Modified table of gate " << idx << endl; )
+		}
+		else {
 			gates[idx].rewireAConnectionRandomly(inputsRange, outputsRange, rng);
+//			D( cout << "Rewired a connection of gate " << idx << endl; )
+		}
 	}
-	D( cout << endl; )
 }
 
 void MarkovBrain::saveMABEMetadata(unsigned numInputs, unsigned numOutputs, unsigned numHidden) {
@@ -113,6 +119,11 @@ void MarkovBrain::saveMABEMetadata(unsigned numInputs, unsigned numOutputs, unsi
 }
 
 bool MarkovBrain::validateMABEMetadata(unsigned numInputs, unsigned numOutputs, unsigned numHidden) const {
+	if( metadata.find("numInputs")==metadata.end() ||
+	    metadata.find("numOutputs")==metadata.end() ||
+	    metadata.find("numHidden")==metadata.end() )
+		return false;
+
 	return metadata.at("numInputs").int_value() == numInputs &&
 	       metadata.at("numOutputs").int_value() == numOutputs &&
 	       metadata.at("numHidden").int_value() == numHidden;

@@ -26,10 +26,12 @@ note:
 
 build/utils/json11/json11.o: utils/json11/json11.hpp utils/json11/json11.cpp
 	g++ -c ${CPPFLAGS} -o $@ utils/json11/json11.cpp
-build/mb/mb.o: utils/json11/json11.hpp mb/gate.h mb/mb.h mb/mb.cpp
+build/mb/mb.o: constants.h utils/json11/json11.hpp mb/gate.h mb/mb.h mb/mb.cpp
 	g++ -c ${CPPFLAGS} -o $@ mb/mb.cpp
 build/evolution/individual.o: constants.h evolution/individual.h evolution/individual.cpp
 	g++ -c ${CPPFLAGS} -o $@ evolution/individual.cpp
+build/individualMB.o: utils/json11/json11.hpp mb/gate.h mb/mb.h constants.h evolution/individual.h individualMB.h individualMB.cpp
+	g++ -c ${CPPFLAGS} -o $@ individualMB.cpp
 build/main.o: constants.h utils/strutil.h evolution/individual.h evolution/evolver.h evolution/evolverMAFPO.h main.cpp
 	g++ -c ${CPPFLAGS} -o $@ main.cpp
 build/tester.o: constants.h utils/strutil.h evolution/individual.h evolution/evolver.h evolution/evolverMAFPO.h tester.cpp
@@ -41,9 +43,11 @@ tests/evolution/evolver: constants.h evolution/individual.h evolution/individual
 	g++ ${CPPFLAGS} -o $@ $^
 tests/evolution/evolverMAFPO: constants.h evolution/individual.h evolution/individual.cpp evolution/evolver.h evolution/evolverMAFPO.h tests/evolution/evolverMAFPO.cpp
 	g++ ${CPPFLAGS} -o $@ $^
-tests/mb/gate: mb/gate.h utils/json11/json11.cpp tests/mb/gate.cpp
+tests/mb/gate: utils/mbreftypes.h utils/randutils.h utils/bitutils.h mb/gate.h utils/json11/json11.hpp utils/json11/json11.cpp tests/mb/gate.cpp
 	g++ ${CPPFLAGS} -o $@ $^
-tests/mb/mb: mb/mb.h mb/mb.cpp mb/gate.h utils/json11/json11.cpp tests/mb/mb.cpp
+tests/mb/mb: constants.h mb/mb.h mb/mb.cpp mb/gate.h utils/mbreftypes.h utils/randutils.h utils/bitutils.h utils/json11/json11.cpp tests/mb/mb.cpp
+	g++ ${CPPFLAGS} -o $@ $^
+tests/individualMB: constants.h individualMB.h individualMB.cpp evolution/individual.h evolution/individual.cpp mb/mb.h mb/mb.cpp mb/gate.h utils/json11/json11.cpp tests/individualMB.cpp
 	g++ ${CPPFLAGS} -o $@ $^
 
 clean:
