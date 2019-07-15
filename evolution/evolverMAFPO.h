@@ -32,6 +32,7 @@ public:
 
 template<class MyIndividual>
 void MAFPOEvolver<MyIndividual>::makeRecords() {
+//	std::cout << "paretoSize: " << paretoFront.size() << " ";
 	Evolver<MyIndividual>::makeRecords(); // standard records: population dumps
 
 	// additional record about the Pareto front
@@ -63,9 +64,11 @@ void MAFPOEvolver<MyIndividual>::advanceForOneGeneration() {
 	// Marking all the individuals that are dominated by at least one other
 	for(auto& first : this->population) {
 		first.evals["isDominated"] = 0.;
+//		std::cout << "Indiv " << first.str() << std::endl;
 		for(const auto& second : this->population) {
 			if(first.isDominatedBy(second, objectives)) {
 				first.evals["isDominated"] = 1.;
+//				std::cout << "...is dominated by " << second.str() << std::endl;
 				break;
 			}
 		}
@@ -78,6 +81,12 @@ void MAFPOEvolver<MyIndividual>::advanceForOneGeneration() {
 			paretoFront.emplace_back(indiv);
 	}
 
+	// Fail gracefully if the Pareto front has outgrown the population size
+	if(paretoFront.size()>=EVOLVER_POPULATION_SIZE) {
+		std::cerr << "Pareto front size (" << paretoFront.size() << ") has reached population size, exiting" << std::endl;
+		exit(0);
+	}
+
 	// They form the beginning of the new population
 	this->population.clear();
 	for(const auto& indiv : paretoFront)
@@ -86,7 +95,9 @@ void MAFPOEvolver<MyIndividual>::advanceForOneGeneration() {
 	// New individuals of the population, except one, are offspring of the Pareto front individuals
 	std::uniform_int_distribution<unsigned> parentPicker(0, paretoFront.size()-1);
 	while(this->population.size()<EVOLVER_POPULATION_SIZE-1) {
-		MyIndividual child(paretoFront[parentPicker(this->rng)]);
+		unsigned pp = parentPicker(this->rng);
+//		std::cout << "selecting parent " << pp << " from Pareto front of size " << paretoFront.size() << std::endl;
+		MyIndividual child(paretoFront[pp]);
 		while(!child.mutate(this->rng)) {}
 		this->population.push_back(child);
 	}

@@ -11,6 +11,12 @@
 
 class Gate {
 public:
+	Gate() : id(-1) {};
+	Gate(const Gate& other) : id(other.id),
+	                          inputShifts(other.inputShifts),
+	                          outputShifts(other.outputShifts),
+	                          table(other.table) {};
+
 	unsigned id;
 	std::vector<unsigned> inputShifts;
 	std::vector<unsigned> outputShifts;

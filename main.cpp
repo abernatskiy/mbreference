@@ -4,14 +4,14 @@
 
 #include "constants.h"
 #include "utils/strutil.h"
-//#include "individualALRuler.h"
+#include "individualMB.h"
 #include "evolution/evolverMAFPO.h"
 
 using namespace std;
 
 int main(int argc, char** argv) {
 
-	if( !(argc==3 || argc==4) || (!isLegalUInt(argv[1])) || (!isLegalUInt(argv[2])) ) {
+	if( !(argc==2 || argc==3) || (!isLegalUInt(argv[1])) || (argc==3 && !isLegalUInt(argv[2])) ) {
 		cout << "Usage: " << argv[0] << " <evolution_random_seed> [initial_population_file]" << endl;
 		return 1;
 	}
@@ -35,7 +35,8 @@ int main(int argc, char** argv) {
 	// Creating an evolver and evolving
 	cout << "Creating an evolver" << endl;
 
-	MAFPOEvolver<TestIndividual> evolver(evolutionSeed, initialPopulationFilename, EVALUATIONS_TO_OPTIMIZE);
+	MAFPOEvolver<MarkovBrainIndividual> evolver(evolutionSeed, initialPopulationFilename, EVALUATIONS_TO_OPTIMIZE);
+//	TestEvolver<MarkovBrainIndividual> evolver("negScore", evolutionSeed);
 
 	cout << "Evolving..." << endl;
 

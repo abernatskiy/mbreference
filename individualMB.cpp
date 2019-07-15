@@ -52,6 +52,7 @@ void MarkovBrainIndividual::randomize(mt19937_64& rng) {
 
 bool MarkovBrainIndividual::mutate(mt19937_64& rng) {
 	mb.mutate(mbInputsRange, mbOutputsRange, rng);
+	renewId();
 	return true; // TODO: consider the consequences of this
 }
 

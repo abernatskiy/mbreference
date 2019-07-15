@@ -52,21 +52,21 @@ void Individual::renewId() {
 }
 
 bool Individual::isAllEquivalentTo(const Individual& other, const std::vector<std::string>& evalNames) const {
-	for(auto en : evalNames)
+	for(const auto& en : evalNames)
 		if(evals.at(en) != other.evals.at(en))
 			return false;
 	return true;
 }
 
 bool Individual::isAnyBetterThan(const Individual& other, const std::vector<std::string>& evalNames) const {
-	for(auto en : evalNames)
+	for(const auto& en : evalNames)
 		if(evals.at(en) < other.evals.at(en))
 			return true;
 	return false;
 }
 
 bool Individual::isInNoWayWorseThan(const Individual& other, const std::vector<std::string>& evalNames) const {
-	for(auto en : evalNames)
+	for(const auto& en : evalNames)
 		if(evals.at(en) > other.evals.at(en))
 			return false;
 	return true;
@@ -82,8 +82,12 @@ bool Individual::isDominatedBy(const Individual& other, const std::vector<std::s
 
 	if(isAnyBetterThan(other, evalNames))
 		return false;
-	else if(BREAK_TIES_BY_ID && isAllEquivalentTo(other, evalNames))
-		return id < other.id;
+	else if(isAllEquivalentTo(other, evalNames)) {
+		if(BREAK_TIES_BY_ID)
+			return id < other.id;
+		else
+			return false;
+	}
 	else
 		return true;
 }

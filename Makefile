@@ -7,14 +7,14 @@ TESTER_DETAILED = bin/tester-detailed-${SUFFIX}
 
 all: ${BINARY} note
 
-${BINARY}: build/evolution/individual.o build/main.o
+${BINARY}: build/utils/json11/json11.o build/mb/mb.o build/evolution/individual.o build/individualMB.o build/main.o
 	g++ ${CPPFLAGS} -o $@ $^
 
-tester: build/evolution/individual.o build/tester.o
+tester: build/utils/json11/json11.o build/mb/mb.o build/evolution/individual.o build/individualMB.o build/tester.o
 	g++ ${CPPFLAGS} -o ${TESTER} $^
 
 # for now it's the same as tester
-tester-detailed: build/evolution/individual.o build/tester.o
+tester-detailed: build/utils/json11/json11.o build/mb/mb.o build/evolution/individual.o build/individualMB.o build/tester.o
 	g++ ${CPPFLAGS} -o ${TESTER_DETAILED} $^
 
 note:
@@ -51,6 +51,6 @@ tests/individualMB: constants.h individualMB.h individualMB.cpp evolution/indivi
 	g++ ${CPPFLAGS} -o $@ $^
 
 clean:
-	rm -f ${BINARY} ${BINARY}.note build/*.o build/evolution/*.o
+	rm -f ${BINARY} ${BINARY}.note build/*.o build/evolution/*.o build/mb/*.o build/utils/*.o
 clean-tests:
 	rm -f tests/evolution/individual tests/evolution/evolver tests/evolution/evolverMAFPO tests/mb/gate tests/mb/mb tests/individualMB

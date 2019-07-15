@@ -90,6 +90,10 @@ void MarkovBrain::mutate(const UIntRange& inputsRange, const UIntRange& outputsR
 //		D( cout << "Inserted a gate" << endl; )
 	}
 	else {
+		if(gates.size()<1) {
+			mutate(inputsRange, outputsRange, rng);
+			return;
+		}
 		unsigned idx = sampleUInt(gates.size()-1, rng);
 		if(r < deletionThreshold) {
 			gates.erase(gates.begin()+idx);
